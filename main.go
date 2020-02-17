@@ -17,7 +17,7 @@ func main() {
 	engine.POST("/login", userhandler.PostLogin)
 
 	user := engine.Group("user")
-	user.GET("/user-info", userhandler.GetUserInfoByAccount)
+	user.GET("/info", userhandler.GetUserInfoByAccount)
 	// user.GET("/:userID", userhandler.GetUserInfo)
 	user.POST("/register", userhandler.PostRegister)
 	user.PUT("/change-password", userhandler.PutUserChangePassword)

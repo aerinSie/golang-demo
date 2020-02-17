@@ -12,7 +12,7 @@ type UserRegisterRequest struct {
 	Account  string `json:"account" gorm:"column:account;not null" binding:"required" validate:"min=1,max=32"`
 	Password string `json:"password" gorm:"column:password;not null" binding:"required" validate:"min=5,max=128"`
 	Name     string `json:"name" gorm:"column:name;not null" binding:"required" validate:"min=5,max=128"`
-	Birthday string `json:"birthday" gorm:"column:birthday;not null" binding:"required" validate:"min=8,max=8"`
+	Birthday string `json:"birthday" gorm:"column:birthday;not null" binding:"required" validate:"min=10,max=10"`
 	Gender   int    `json:"gender" gorm:"column:gender;not null" binding:"required" `
 }
 
@@ -33,9 +33,8 @@ type UserInfoRequest struct {
 	Token   string `json:"token" gorm:"column:token;not null" binding:"required" validate:"min=5,max=128"`
 }
 
-// UserInfo is ...
-type UserInfo struct {
-	ID       uint64 `json:"id"`
+// UserInfoResponse is ...
+type UserInfoResponse struct {
 	Name     string `json:"name"`
 	Birthday string `json:"birthday"`
 	Gender   int    `json:"gender"`
@@ -56,6 +55,8 @@ func GetUserInfo(c *gin.Context) {
 
 // PostRegister is ...
 func PostRegister(c *gin.Context) {
+	var token Token
+	token.Token = "abcd.abcd.abcd"
 
 	var req UserRegisterRequest
 	c.BindJSON(&req)
@@ -64,7 +65,7 @@ func PostRegister(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code":    1,
 		"message": "ok",
-		"data":    "token:abcd.abcd.abcd", //todo token parse
+		"data":    token,
 	})
 
 }
@@ -72,6 +73,8 @@ func PostRegister(c *gin.Context) {
 // PostLogin is ...
 func PostLogin(c *gin.Context) {
 
+	var token Token
+	token.Token = "abcd.abcd.abcd"
 	var req UserLoginRequest
 	c.BindJSON(&req)
 
@@ -79,27 +82,22 @@ func PostLogin(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code":    1,
 		"message": "ok",
-		"data":    "token:abcd.abcd.abcd", //todo token parse
+		"data":    token,
 	})
 
 }
 
 // GetUserInfoByAccount is ...
 func GetUserInfoByAccount(c *gin.Context) {
-	account, _ := c.GetQuery("account")
-	token, _ := c.GetQuery("token")
+	// account, _ := c.GetQuery("account")
+	// token, _ := c.GetQuery("token")
 
+	var userInfoRes UserInfoResponse
+	userInfoRes.Name = "Allen"
+	userInfoRes.Birthday = "1990/01/01"
+	userInfoRes.Gender = 1
 	// response
-	c.JSON(http.StatusOK, gin.H{
-		"code":    1,
-		"message": "ok",
-		"data":    "token:abcd.abcd.abcd" + account + token,
-		// data: {
-		// 	name: "Jerry",
-		// 	birthday: "xxxxx",
-		// 	gender: 0
-		// }
-	})
+	c.JSON(http.StatusOK, userInfoRes)
 }
 
 // PutUserChangePassword is ...
