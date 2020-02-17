@@ -14,14 +14,13 @@ func main() {
 	// 注册一个路由和处理函数
 	engine.Any("/", WebRoot)
 
-	// engine.POST("/login", PostLogin)
+	engine.POST("/login", userhandler.PostLogin)
+
 	user := engine.Group("user")
-	// user.GET("/list", GetUserList)
-
-	user.GET("/:userID", userhandler.GetUserInfo)
+	user.GET("/user-info", userhandler.GetUserInfoByAccount)
+	// user.GET("/:userID", userhandler.GetUserInfo)
 	user.POST("/register", userhandler.PostRegister)
-
-	// engine.PUT("/change-password", PutUserChangePassword)
+	user.PUT("/change-password", userhandler.PutUserChangePassword)
 
 	// 绑定端口，然后启动应用
 	engine.Run(":9205")

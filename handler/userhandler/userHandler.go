@@ -57,13 +57,61 @@ func GetUserInfo(c *gin.Context) {
 // PostRegister is ...
 func PostRegister(c *gin.Context) {
 
-	var req UserLoginRequest
+	var req UserRegisterRequest
 	c.BindJSON(&req)
 
+	// response
 	c.JSON(http.StatusOK, gin.H{
 		"code":    1,
 		"message": "ok",
-		"data":    req.Account,
+		"data":    "token:abcd.abcd.abcd", //todo token parse
+	})
+
+}
+
+// PostLogin is ...
+func PostLogin(c *gin.Context) {
+
+	var req UserLoginRequest
+	c.BindJSON(&req)
+
+	// response
+	c.JSON(http.StatusOK, gin.H{
+		"code":    1,
+		"message": "ok",
+		"data":    "token:abcd.abcd.abcd", //todo token parse
+	})
+
+}
+
+// GetUserInfoByAccount is ...
+func GetUserInfoByAccount(c *gin.Context) {
+	account, _ := c.GetQuery("account")
+	token, _ := c.GetQuery("token")
+
+	// response
+	c.JSON(http.StatusOK, gin.H{
+		"code":    1,
+		"message": "ok",
+		"data":    "token:abcd.abcd.abcd" + account + token,
+		// data: {
+		// 	name: "Jerry",
+		// 	birthday: "xxxxx",
+		// 	gender: 0
+		// }
+	})
+}
+
+// PutUserChangePassword is ...
+func PutUserChangePassword(c *gin.Context) {
+
+	var req UserLoginRequest
+	c.BindJSON(&req)
+
+	// response
+	c.JSON(http.StatusOK, gin.H{
+		"code":    1,
+		"message": "ok",
 	})
 
 }
