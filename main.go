@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"./handler/userhandler"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,12 +14,13 @@ func main() {
 	// 注册一个路由和处理函数
 	engine.Any("/", WebRoot)
 
-	// engine.POST("/register", PostRegister)
 	// engine.POST("/login", PostLogin)
 	user := engine.Group("user")
 	// user.GET("/list", GetUserList)
 
 	user.GET("/:userID", userhandler.GetUserInfo)
+	user.POST("/register", userhandler.PostRegister)
+
 	// engine.PUT("/change-password", PutUserChangePassword)
 
 	// 绑定端口，然后启动应用
