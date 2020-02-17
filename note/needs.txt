@@ -1,0 +1,67 @@
+
+POST
+
+Register
+
+Parameters: 
+String account
+String password
+String name
+String birthday
+Int gender 
+
+Response
+{
+  code: 0,
+  message: "Success",
+  data: {
+    "token": "asdfasfd.asbasdf.asfasdfasd.fasdf"
+  }
+}
+
+
+Login
+
+Parameters:
+String account
+String password
+
+Response
+{
+  code: 0,
+  message: "Success",
+  data: {
+    "token": "asdfasfd.asbasdf.asfasdfasd.fasdf"
+  }
+}
+
+Get 
+UserData
+
+Parameters:
+String account
+String token
+
+Response
+{
+  code: 0,
+  message: "Success",
+  data: {
+    name: "Jerry",
+    birthday: "xxxxx",
+    gender: 0
+  }
+}
+
+PUT
+ChangePassword
+
+Parameters:
+String account
+String oldPassword
+String newPassword
+
+{
+  code: 0,
+  message: "Success",
+}
