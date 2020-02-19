@@ -1,4 +1,4 @@
-下載package
+若下載package於 $GOPATH
 ```
 $ go get github.com/gin-gonic/gin
 ```
@@ -8,5 +8,5 @@ $ go run main.go
 ```
 連網
 ```
-$ curl http://localhost:9205
+$ curl http://localhost:8080
 ```

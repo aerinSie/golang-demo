@@ -1,11 +1,10 @@
 package userhandler
-
 import (
-	"fmt"
 	"net/http"
-
+	"fmt"
 	"github.com/gin-gonic/gin"
 )
+
 
 // UserRegisterRequest is ...
 type UserRegisterRequest struct {
