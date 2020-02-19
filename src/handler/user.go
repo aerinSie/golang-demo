@@ -1,4 +1,4 @@
-package userhandler
+package handler
 import (
 	"net/http"
 	"fmt"

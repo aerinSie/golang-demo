@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 	"github.com/gin-gonic/gin"
-	userhandler "go-module/handler"//go-module是 go.mod檔的module value /handler是檔案夾的路徑名稱
+	"golang-demo/src/handler"//golang-demo是 go.mod檔的module 
 )
 
 func main() {
@@ -13,16 +13,16 @@ func main() {
 	// 注册一个路由和处理函数
 	engine.Any("/", WebRoot)
 
-	engine.POST("/login", userhandler.PostLogin)
+	engine.POST("/login", handler.PostLogin)
 
 	user := engine.Group("user")
-	user.GET("/info", userhandler.GetUserInfoByAccount)
+	user.GET("/info", handler.GetUserInfoByAccount)
 	// user.GET("/:userID", userhandler.GetUserInfo)
-	user.POST("/register", userhandler.PostRegister)
-	user.PUT("/change-password", userhandler.PutUserChangePassword)
+	user.POST("/register", handler.PostRegister)
+	user.PUT("/change-password", handler.PutUserChangePassword)
 
 	// 绑定端口，然后启动应用
-	engine.Run(":8080")
+	engine.Run(":9205")
 }
 
 //WebRoot is ...
