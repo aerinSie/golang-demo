@@ -81,3 +81,4 @@ EC2Co-EcsEl-1AWU1LI9XRXJ3-1697609552.ap-northeast-2.elb.amazonaws.com:9205
 ### 維護
 - 這個ECS因為是設定拉最新版的ECR，之後若有版本更新，只要更新ECR即可。
 - 但如果 更新後的ECR的port有改過(如9205改成8080)，就必須重新設定ECS 相關服務。
+- 如果要看log檔，前往 AWS CloudWatch > 日誌 > 日誌組 > 選擇專案的日誌組 即可
