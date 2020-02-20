@@ -1,6 +1,6 @@
 # API 文檔
-- http://localhost:9205/swagger/index.html
-- http://EC2Co-EcsEl-1AWU1LI9XRXJ3-1697609552.ap-northeast-2.elb.amazonaws.com:9205/swagger/index.html
+- [本地swagger API](http://localhost:9205/swagger/index.html)
+- [遠端swagger API](http://EC2Co-EcsEl-1AWU1LI9XRXJ3-1697609552.ap-northeast-2.elb.amazonaws.com:9205/swagger/index.html)
 
 # run 本地環境
 
@@ -51,6 +51,7 @@ if fail ，用下列的指令看看。以AWS帳戶ID=000000000000 為例
 aws ecr get-login-password | docker login --username AWS --password-stdin 000000000000.dkr.ecr.ap-northeast-2.amazonaws.com
 ```
 - 生成docker image 以專案名稱=golang-demo為例
+- cd Dockerfile所在路徑
 ```
 docker build -t golang-demo
 ```
