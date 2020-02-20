@@ -5,31 +5,30 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-
 // UserRegisterRequest is ...
 type UserRegisterRequest struct {
-	Account  string `json:"account" gorm:"column:account;not null" binding:"required" validate:"min=1,max=32"`
-	Password string `json:"password" gorm:"column:password;not null" binding:"required" validate:"min=5,max=128"`
-	Name     string `json:"name" gorm:"column:name;not null" binding:"required" validate:"min=5,max=128"`
-	Birthday string `json:"birthday" gorm:"column:birthday;not null" binding:"required" validate:"min=10,max=10"`
-	Gender   int    `json:"gender" gorm:"column:gender;not null" binding:"required" `
+	Account  string `json:"account"`
+	Password string `json:"password"`
+	Name     string `json:"name"`
+	Birthday string `json:"birthday"`
+	Gender   int    `json:"gender"`
 }
 
-// Token is ...
-type Token struct {
-	Token string `json:"token"`
+// Data is ...
+type Data struct {
+	Token string `json:"token" example:"abcd.abcd.abcd"`
 }
 
 // UserLoginRequest is ...
 type UserLoginRequest struct {
-	Account  string `json:"account" gorm:"column:account;not null" binding:"required" validate:"min=1,max=32"`
-	Password string `json:"password" gorm:"column:password;not null" binding:"required" validate:"min=5,max=128"`
+	Account  string `json:"account"`
+	Password string `json:"password"`
 }
 
 // UserInfoRequest is ...
 type UserInfoRequest struct {
-	Account string `json:"account" gorm:"column:account;not null" binding:"required" validate:"min=1,max=32"`
-	Token   string `json:"token" gorm:"column:token;not null" binding:"required" validate:"min=5,max=128"`
+	Account string `json:"account"`
+	Token   string `json:"token"`
 }
 
 // UserInfoResponse is ...
@@ -41,9 +40,22 @@ type UserInfoResponse struct {
 
 // UserChangePwdRequest is ...
 type UserChangePwdRequest struct {
-	Account     string `json:"account" gorm:"column:account;not null" binding:"required" validate:"min=1,max=32"`
-	OldPassword string `json:"oldPassword" gorm:"column:oldPassword;not null" binding:"required" validate:"min=5,max=128"`
-	NewPassword string `json:"newPassword" gorm:"column:newPassword;not null" binding:"required" validate:"min=5,max=128"`
+	Account     string `json:"account"`
+	OldPassword string `json:"oldPassword`
+	NewPassword string `json:"newPassword"`
+}
+// GetResponse is ...
+type GetResponse struct{
+	Code     int `json:"code" example:"1"`
+	Message string `json:"message" example:"ok"`
+	data UserInfoResponse `json:"data`
+}
+
+// BaseResponse is ...
+type BaseResponse struct{
+	Code     int `json:"code" example:"1"`
+	Message string `json:"message" example:"ok"`
+	Data Data `json:"data"`
 }
 
 // GetUserInfo is ...
@@ -52,16 +64,18 @@ func GetUserInfo(c *gin.Context) {
 	c.String(http.StatusOK, fmt.Sprintf("hello, world! user: %s", userID))
 }
 
-// PostRegister is ...
+// PostRegister godoc
+// @Summary 使用者註冊
+// @Tags User
 // @Description add user
 // @Accept  json
 // @Produce json
 // @Param body body UserRegisterRequest true "必填"
-// @Success 200 {string} string "ok"
+// @Success 200 object BaseResponse 
 // @Router /user/register [post]
 func PostRegister(c *gin.Context) {
-	var token Token
-	token.Token = "abcd.abcd.abcd"
+	var data Data
+	data.Token = "abcd.abcd.abcd"
 
 	var req UserRegisterRequest
 	c.BindJSON(&req)
@@ -70,22 +84,24 @@ func PostRegister(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code":    1,
 		"message": "ok",
-		"data":    token,
+		"data":    data,
 	})
 
 }
 
-// PostLogin is ...
+// PostLogin godoc
+// @Summary 使用者登錄
+// @Tags Common
 // @Description user login
 // @Accept  json
 // @Produce json
 // @Param body body UserLoginRequest true "必填"
-// @Success 200 {string} string "ok"
+// @Success 200 object BaseResponse "1-ok 0-fail"
 // @Router /login [post]
 func PostLogin(c *gin.Context) {
 
-	var token Token
-	token.Token = "abcd.abcd.abcd"
+	var data Data
+	data.Token = "abcd.abcd.abcd"
 	var req UserLoginRequest
 	c.BindJSON(&req)
 
@@ -93,16 +109,18 @@ func PostLogin(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code":    1,
 		"message": "ok",
-		"data":    token,
+		"data":    data,
 	})
 
 }
 
-// GetUserInfoByAccount is ...
+// GetUserInfoByAccount godoc
+// @Summary 查詢使用者資訊
+// @Tags User
 // @Description get user info data
 // @Accept  json
 // @Produce json
-// @Success 200 {string} string "hello"
+// @Success 200 object GetResponse 
 // @Router /user/info [get]
 func GetUserInfoByAccount(c *gin.Context) {
 	// account, _ := c.GetQuery("account")
@@ -116,12 +134,14 @@ func GetUserInfoByAccount(c *gin.Context) {
 	c.JSON(http.StatusOK, userInfoRes)
 }
 
-// PutUserChangePassword is ...
+// PutUserChangePassword godoc
+// @Summary 修改使用者密碼
+// @Tags User
 // @Description update user login password
 // @Accept  json
 // @Produce json
 // @Param body body UserChangePwdRequest true "必填"
-// @Success 200 {string} string "ok"
+// @Success 200 object BaseResponse 
 // @Router /user/change-password [put]
 func PutUserChangePassword(c *gin.Context) {
 

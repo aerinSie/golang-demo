@@ -1,6 +1,6 @@
 # API 文檔
-http://localhost:9205/swagger/index.html
-http://EC2Co-EcsEl-1AWU1LI9XRXJ3-1697609552.ap-northeast-2.elb.amazonaws.com:9205/swagger/index.html
+- http://localhost:9205/swagger/index.html
+- http://EC2Co-EcsEl-1AWU1LI9XRXJ3-1697609552.ap-northeast-2.elb.amazonaws.com:9205/swagger/index.html
 
 # run 本地環境
 

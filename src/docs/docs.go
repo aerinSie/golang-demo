@@ -42,6 +42,10 @@ var doc = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "Common"
+                ],
+                "summary": "使用者登錄",
                 "parameters": [
                     {
                         "description": "必填",
@@ -55,9 +59,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "ok",
+                        "description": "1-ok 0-fail",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/handler.BaseResponse"
                         }
                     }
                 }
@@ -72,6 +76,10 @@ var doc = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "修改使用者密碼",
                 "parameters": [
                     {
                         "description": "必填",
@@ -85,9 +93,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "ok",
+                        "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/handler.BaseResponse"
                         }
                     }
                 }
@@ -102,11 +110,15 @@ var doc = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "查詢使用者資訊",
                 "responses": {
                     "200": {
-                        "description": "hello",
+                        "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/handler.GetResponse"
                         }
                     }
                 }
@@ -121,6 +133,10 @@ var doc = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "使用者註冊",
                 "parameters": [
                     {
                         "description": "必填",
@@ -134,9 +150,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "ok",
+                        "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/handler.BaseResponse"
                         }
                     }
                 }
@@ -144,13 +160,51 @@ var doc = `{
         }
     },
     "definitions": {
+        "handler.BaseResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/handler.Data"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "ok"
+                }
+            }
+        },
+        "handler.Data": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string",
+                    "example": "abcd.abcd.abcd"
+                }
+            }
+        },
+        "handler.GetResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/handler.UserInfoResponse"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "ok"
+                }
+            }
+        },
         "handler.UserChangePwdRequest": {
             "type": "object",
-            "required": [
-                "account",
-                "newPassword",
-                "oldPassword"
-            ],
             "properties": {
                 "account": {
                     "type": "string"
@@ -163,12 +217,22 @@ var doc = `{
                 }
             }
         },
+        "handler.UserInfoResponse": {
+            "type": "object",
+            "properties": {
+                "birthday": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
         "handler.UserLoginRequest": {
             "type": "object",
-            "required": [
-                "account",
-                "password"
-            ],
             "properties": {
                 "account": {
                     "type": "string"
@@ -180,13 +244,6 @@ var doc = `{
         },
         "handler.UserRegisterRequest": {
             "type": "object",
-            "required": [
-                "account",
-                "birthday",
-                "gender",
-                "name",
-                "password"
-            ],
             "properties": {
                 "account": {
                     "type": "string"
