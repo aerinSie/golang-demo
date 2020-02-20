@@ -1,0 +1,123 @@
+definitions:
+  handler.UserChangePwdRequest:
+    properties:
+      account:
+        type: string
+      newPassword:
+        type: string
+      oldPassword:
+        type: string
+    required:
+    - account
+    - newPassword
+    - oldPassword
+    type: object
+  handler.UserLoginRequest:
+    properties:
+      account:
+        type: string
+      password:
+        type: string
+    required:
+    - account
+    - password
+    type: object
+  handler.UserRegisterRequest:
+    properties:
+      account:
+        type: string
+      birthday:
+        type: string
+      gender:
+        type: integer
+      name:
+        type: string
+      password:
+        type: string
+    required:
+    - account
+    - birthday
+    - gender
+    - name
+    - password
+    type: object
+info:
+  contact:
+    email: seekastyle@gmail.com
+    name: API Support
+    url: http://www.swagger.io/support
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+paths:
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: user login
+      parameters:
+      - description: 必填
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UserLoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+  /user/change-password:
+    put:
+      consumes:
+      - application/json
+      description: update user login password
+      parameters:
+      - description: 必填
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UserChangePwdRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+  /user/info:
+    get:
+      consumes:
+      - application/json
+      description: get user info data
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: hello
+          schema:
+            type: string
+  /user/register:
+    post:
+      consumes:
+      - application/json
+      description: add user
+      parameters:
+      - description: 必填
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UserRegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+swagger: "2.0"

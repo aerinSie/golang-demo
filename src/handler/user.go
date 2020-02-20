@@ -53,6 +53,12 @@ func GetUserInfo(c *gin.Context) {
 }
 
 // PostRegister is ...
+// @Description add user
+// @Accept  json
+// @Produce json
+// @Param body body UserRegisterRequest true "必填"
+// @Success 200 {string} string "ok"
+// @Router /user/register [post]
 func PostRegister(c *gin.Context) {
 	var token Token
 	token.Token = "abcd.abcd.abcd"
@@ -70,6 +76,12 @@ func PostRegister(c *gin.Context) {
 }
 
 // PostLogin is ...
+// @Description user login
+// @Accept  json
+// @Produce json
+// @Param body body UserLoginRequest true "必填"
+// @Success 200 {string} string "ok"
+// @Router /login [post]
 func PostLogin(c *gin.Context) {
 
 	var token Token
@@ -87,6 +99,11 @@ func PostLogin(c *gin.Context) {
 }
 
 // GetUserInfoByAccount is ...
+// @Description get user info data
+// @Accept  json
+// @Produce json
+// @Success 200 {string} string "hello"
+// @Router /user/info [get]
 func GetUserInfoByAccount(c *gin.Context) {
 	// account, _ := c.GetQuery("account")
 	// token, _ := c.GetQuery("token")
@@ -100,9 +117,15 @@ func GetUserInfoByAccount(c *gin.Context) {
 }
 
 // PutUserChangePassword is ...
+// @Description update user login password
+// @Accept  json
+// @Produce json
+// @Param body body UserChangePwdRequest true "必填"
+// @Success 200 {string} string "ok"
+// @Router /user/change-password [put]
 func PutUserChangePassword(c *gin.Context) {
 
-	var req UserLoginRequest
+	var req UserChangePwdRequest
 	c.BindJSON(&req)
 
 	// response
