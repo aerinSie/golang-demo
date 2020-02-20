@@ -126,6 +126,12 @@ paths:
       consumes:
       - application/json
       description: get user info data
+      parameters:
+      - description: search by account
+        in: query
+        name: account
+        required: true
+        type: string
       produces:
       - application/json
       responses:

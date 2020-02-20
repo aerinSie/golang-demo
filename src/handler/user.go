@@ -120,6 +120,7 @@ func PostLogin(c *gin.Context) {
 // @Description get user info data
 // @Accept  json
 // @Produce json
+// @Param account query string true "search by account" 
 // @Success 200 object GetResponse 
 // @Router /user/info [get]
 func GetUserInfoByAccount(c *gin.Context) {

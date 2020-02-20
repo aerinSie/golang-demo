@@ -94,6 +94,15 @@
                     "User"
                 ],
                 "summary": "查詢使用者資訊",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "search by account",
+                        "name": "account",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
