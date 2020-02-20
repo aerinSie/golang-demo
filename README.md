@@ -59,4 +59,21 @@ docker push 000000000000.dkr.ecr.ap-northeast-2.amazonaws.com/golang-demo:latest
 如果成功 [ECR > 存儲庫 > 專案名稱] 底下會新增一個image檔案
 
 ### run ECS
-集群 > 
+集群 > 開始使用 
+#### Container definition
+- 選擇： custom
+- 容器名稱： 自己命名
+- 映像：貼上 ECR的URI
+- 端口映射： 已本例為例 填9205
+
+#### Task defination
+- 負載均衡器類型：Application Load Balancer
+- 監聽窗口： 9205
+
+next > 創建集群 > loading > 查看服務
+
+### 連網 
+點擊 EC2 負載均衡器 > 找到 DNS 名稱後，加上端口名稱:9205
+- 例如： 
+EC2Co-EcsEl-1AWU1LI9XRXJ3-1697609552.ap-northeast-2.elb.amazonaws.com:9205
+- 再加上指定網頁路徑 如 /user/info 後即可連上瀏覽器
