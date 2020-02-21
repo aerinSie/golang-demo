@@ -10,7 +10,7 @@ go get github.com/gin-gonic/gin
 ```
 - 執行主程式
 ```
-go run main.go
+go run main.go -env="local" arg1
 ```
 - 連網
 ```

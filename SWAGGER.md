@@ -4,3 +4,7 @@
 export GO111MODULE=on
 export PATH=$PATH:$GOPATH/bin
 ```
+- 升級所有依賴
+```
+go get -u
+```
