@@ -23,11 +23,13 @@ curl http://localhost:9205
 - 建立一個名為 golang-demo 的image
 ```
 docker build . -t golang-demo 
+docker build --build-arg env=prd . -t golang-demo:latest
 ```
 ## 本地docker運行
 - docker執行image為container 對外開8080對內9205
 ```
 docker run -i -t -p 8080:9205 golang-demo
+docker run -e "env=prd" -i -t -p 8080:9205 golang-demo
 ```
 - 連網
 ```
