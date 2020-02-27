@@ -31,8 +31,7 @@ func config() {
 	// &env是用戶命令行的-env後的參數值
 	// flag.StringVar(&myenv, "myenv", "local", "環境名，默認為local")
 	// flag.Parse()               //解析所有註冊的flag
-	viper.SetConfigName(myenv) // 设置配置文件名 (不带后缀)
-	fmt.Println("myenv==============" + myenv)
+	viper.SetConfigName(myenv)    // 设置配置文件名 (不带后缀)
 	viper.AddConfigPath("config") // 第一个搜索路径
 	err := viper.ReadInConfig()   // 读取配置数据
 	if err != nil {

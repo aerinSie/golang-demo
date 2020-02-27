@@ -12,6 +12,7 @@ docker build . -t golang-demo
 ## 本地docker運行
 使用 local.yaml 設定
 ```
+docker run -i --env lalala=lalalaenv -t -p 8080:9205 golang-demo local
 docker run -i -t -p 8080:9205 golang-demo local
 ```
 用 prd.yaml 設定
@@ -25,7 +26,13 @@ curl http://localhost:8080
 ## AWS ECS運行
 ### 上傳到ECR
 - 需要先安裝AWS CLI
-- 需要先登入AWS CLI
+- 需要先登入AWS ```
+指令說明https://docs.aws.amazon.com/cli/latest/reference/ecr/index.html
+```
+//更新aws cli
+pip install --user --upgrade awscli
+
+```
 
 進入 ECR > 存儲庫 > 專案名稱 > 查看推送命令
 
@@ -37,9 +44,14 @@ if ok 會顯示 Login Succeeded
 
 if fail ，用下列的指令看看。以AWS帳戶ID=000000000000 為例
 ```
-aws ecr get-login-password | docker login --username AWS --password-stdin 000000000000.dkr.ecr.ap-northeast-2.amazonaws.com
+aws ecr get-login --region ap-northeast-2 --no-include-email
+
+aws ecr get-login-password | docker login --username AWS --password-stdin 752636745299.dkr.ecr.ap-northeast-2.amazonaws.com
+
+如果都行不通
+就去刪掉 ~/.aws 裡面的  credentials 檔案，重新設定權限
 ```
-- 生成docker image 以專案名稱=golang-demo為例
+- 生成docker image 以專案名稱=golang-demo為例(可以直接看 ECR的 Push commands for 你的專案)
 - cd Dockerfile所在路徑
 ```
 docker build -t golang-demo .
