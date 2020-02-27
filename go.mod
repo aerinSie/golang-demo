@@ -15,7 +15,7 @@ require (
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/mailru/easyjson v0.7.1 // indirect
 	github.com/mattn/go-isatty v0.0.12 // indirect
-	github.com/spf13/viper v1.6.2 // indirect
+	github.com/spf13/viper v1.6.2
 	github.com/swaggo/gin-swagger v1.2.0
 	github.com/swaggo/swag v1.6.5
 	golang.org/x/net v0.0.0-20200219183655-46282727080f // indirect

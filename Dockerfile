@@ -1,5 +1,5 @@
+# ARG給參數預設值 如果``` $docker build --build-arg GO_VERSION=1.13 ```未指定新的值，就使用先指定好的值
 ARG GO_VERSION=1.13
-ARG env
 FROM golang:${GO_VERSION}-alpine AS builder
 
 RUN apk update && apk add alpine-sdk git && rm -rf /var/cache/apk/*
