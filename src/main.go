@@ -32,7 +32,7 @@ func main() {
 }
 
 // initRoute is 轉發 main url
-func initRoute(engine * gin.Engine)  {
+func initRoute(engine *gin.Engine) {
 	// http://localhost:9205/swagger/index.html
 	engine.GET("/swagger/*any", ginSwagger.DisablingWrapHandler(swaggerFiles.Handler, "NAME_OF_ENV_VARIABLE"))
 	// 注册一个路由和处理函数
@@ -48,10 +48,11 @@ func webRoot(context *gin.Context) {
 }
 
 // userRoute is 轉發 user開頭的url
-func userRoute(engine * gin.Engine){
+func userRoute(engine *gin.Engine) {
 	user := engine.Group("user")
 	user.GET("/info", usermgmt.GetUserInfoByAccount)
 	// user.GET("/:userID", userhandler.GetUserInfo)
 	user.POST("/register", usermgmt.PostRegister)
 	user.PUT("/change-password", usermgmt.PutUserChangePassword)
+	user.GET("/v2/userlist", usermgmt.GerUserList)
 }
