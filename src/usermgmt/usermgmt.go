@@ -1,7 +1,9 @@
-package handler
+package usermgmt
+
 import (
-	"net/http"
 	"fmt"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -44,18 +46,19 @@ type UserChangePwdRequest struct {
 	OldPassword string `json:"oldPassword`
 	NewPassword string `json:"newPassword"`
 }
+
 // GetResponse is ...
-type GetResponse struct{
-	Code     int `json:"code" example:"1"`
-	Message string `json:"message" example:"ok"`
-	data UserInfoResponse `json:"data`
+type GetResponse struct {
+	Code    int              `json:"code" example:"1"`
+	Message string           `json:"message" example:"ok"`
+	data    UserInfoResponse `json:"data`
 }
 
 // BaseResponse is ...
-type BaseResponse struct{
-	Code     int `json:"code" example:"1"`
+type BaseResponse struct {
+	Code    int    `json:"code" example:"1"`
 	Message string `json:"message" example:"ok"`
-	Data Data `json:"data"`
+	Data    Data   `json:"data"`
 }
 
 // GetUserInfo is ...
@@ -71,7 +74,7 @@ func GetUserInfo(c *gin.Context) {
 // @Accept  json
 // @Produce json
 // @Param body body UserRegisterRequest true "必填"
-// @Success 200 object BaseResponse 
+// @Success 200 object BaseResponse
 // @Router /user/register [post]
 func PostRegister(c *gin.Context) {
 	var data Data
@@ -120,8 +123,8 @@ func PostLogin(c *gin.Context) {
 // @Description get user info data
 // @Accept  json
 // @Produce json
-// @Param account query string true "search by account" 
-// @Success 200 object GetResponse 
+// @Param account query string true "search by account"
+// @Success 200 object GetResponse
 // @Router /user/info [get]
 func GetUserInfoByAccount(c *gin.Context) {
 	// account, _ := c.GetQuery("account")
@@ -142,7 +145,7 @@ func GetUserInfoByAccount(c *gin.Context) {
 // @Accept  json
 // @Produce json
 // @Param body body UserChangePwdRequest true "必填"
-// @Success 200 object BaseResponse 
+// @Success 200 object BaseResponse
 // @Router /user/change-password [put]
 func PutUserChangePassword(c *gin.Context) {
 
